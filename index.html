@@ -64,7 +64,7 @@
 			<br>
 			<div class="entry">
 				<input id="search" placeholder="Please insert image url" />
-				<button>Search</button>
+				<button onclick="getTags()">Search</button>
 			</div>
 			
 			<div class="results">
@@ -83,22 +83,34 @@
 
 		</center>
 		<script type="text/javascript" src="https://sdk.clarifai.com/js/clarifai-2.0.9.js"></script>
+		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 		<script>
 		  var app = new Clarifai.App(
 		    'z9xSrRIPyTNGzAL72ucZ4vRaCBeN9JcA9Vwu3oak',
 		    'jr9eYCDs1nFvIQECyZsVEJhTL3dAhzFncE8Oj18I'
 		  );
+		  // var great_wall = "http://famouswonders.com/wp-content/gallery/the-great-wall-of-china/snaking-of-great-wall-of-china.jpg";
+		  
 
-		  app.models.predict(Clarifai.GENERAL_MODEL, "https://samples.clarifai.com/metro-north.jpg").then(
-	      function(response) {
-	        // do something with response
-	        console.log(response)
-	      },
-	      function(err) {
-	      	console.log(error)
-	        // there was an error
-	      }
-	    );
+
+		  function getTags(url){
+		  	var img_url = $('#search').val();
+		  	console.log(img_url);
+
+
+  		  app.models.predict(Clarifai.GENERAL_MODEL, img_url).then(
+  	      function(response) {
+  	        // do something with response
+  	        console.log(response)
+  	        // response.data.outputs[]
+
+  	      },
+  	      function(err) {
+  	      	console.log(error)
+  	        // there was an error
+  	      }
+  	    );
+		  }
 		</script>
 	</body>
 </html>

@@ -48,9 +48,10 @@
 				font-size: 24px;
 				background: #66BB6A;
 				color: white;
-				margin-bottom: 12px;
+				margin-bottom: 50px;
 				padding: 10px;
 				text-decoration: none;
+
 			}
 			
 
@@ -101,9 +102,21 @@
   		  app.models.predict(Clarifai.GENERAL_MODEL, img_url).then(
   	      function(response) {
   	        // do something with response
-  	        console.log(response)
-  	        // response.data.outputs[]
+  	        var tags = response.data.outputs[0].data.concepts;
+  	        $('.results .tag').remove();
+  	        tags.forEach(function(tag, i){
+  	        	console.log(tag, i);
 
+  	        	var template = `
+								<a class="tag" href="http://lmgtfy.com/?q=party_parrot" target="_blank">
+									<img src="http://cultofthepartyparrot.com/parrots/parrot.gif" alt="">
+								</a>
+  	        	`;
+
+  	        	var el =$(template).append(tag.name);
+
+  	        	$('.results').append(el);
+  	        });
   	      },
   	      function(err) {
   	      	console.log(error)

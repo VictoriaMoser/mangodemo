@@ -82,6 +82,24 @@
 			</div>
 
 		</center>
+		<script type="text/javascript" src="https://sdk.clarifai.com/js/clarifai-2.0.9.js"></script>
+		<script>
+		  var app = new Clarifai.App(
+		    'z9xSrRIPyTNGzAL72ucZ4vRaCBeN9JcA9Vwu3oak',
+		    'jr9eYCDs1nFvIQECyZsVEJhTL3dAhzFncE8Oj18I'
+		  );
+
+		  app.models.predict(Clarifai.GENERAL_MODEL, "https://samples.clarifai.com/metro-north.jpg").then(
+	      function(response) {
+	        // do something with response
+	        console.log(response)
+	      },
+	      function(err) {
+	      	console.log(error)
+	        // there was an error
+	      }
+	    );
+		</script>
 	</body>
 </html>
 
